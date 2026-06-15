@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Hotel Room Booking Dashboard</title>
+    <!-- Modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Brand Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21V11C19 9.89543 18.1046 9 17 9H7C5.89543 9 5 9.89543 5 11V21M3 21H21M10 13H14M10 17H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 3L20 9H4L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1>LuxStay</h1>
+                <span class="badge">Premium Portal</span>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <span class="stat-label">Total Rooms</span>
+                    <span class="stat-value" id="stat-total-rooms">-</span>
+                </div>
+                <div class="stat-card highlight-available">
+                    <span class="stat-label">Available</span>
+                    <span class="stat-value" id="stat-available-rooms">-</span>
+                </div>
+                <div class="stat-card highlight-booked">
+                    <span class="stat-label">Booked</span>
+                    <span class="stat-value" id="stat-booked-rooms">-</span>
+                </div>
+            </div>
+
+            <!-- Logged-in User Info & Logout -->
+            <div class="user-panel">
+                <div class="user-panel-info">
+                    <span class="user-panel-greeting">Signed in as</span>
+                    <span class="user-panel-name" id="user-panel-name">-</span>
+                </div>
+                <button type="button" id="btn-logout" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <!-- Search & Filters Toolbar -->
+            <section class="toolbar-section">
+                <div class="section-header">
+                    <h2>Filter Rooms</h2>
+                    <p class="subtitle">Find the perfect room by type or budget</p>
+                </div>
+                
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="filter-type">Room Type</label>
+                        <select id="filter-type" class="form-control">
+                            <option value="">All Types</option>
+                            <option value="Single">Single Room</option>
+                            <option value="Double">Double Room</option>
+                            <option value="Suite">Luxurious Suite</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-area">Area / Location</label>
+                        <select id="filter-area" class="form-control">
+                            <option value="">All Areas</option>
+                            <!-- Dynamic areas loaded here -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-min-price">Min Price (₹)</label>
+                        <input type="number" id="filter-min-price" class="form-control" placeholder="Min" min="0">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-max-price">Max Price (₹)</label>
+                        <input type="number" id="filter-max-price" class="form-control" placeholder="Max" min="0">
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button type="button" id="btn-reset-filters" class="btn btn-secondary">Clear Filters</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rooms and Bookings Split Screen -->
+            <div class="dashboard-grid">
+                <!-- Rooms Listing Column -->
+                <section class="rooms-section">
+                    <div class="section-title-bar">
+                        <h3>Available & Booked Rooms</h3>
+                        <span class="count-badge" id="rooms-count">0 Rooms</span>
+                    </div>
+                    
+                    <div class="rooms-grid" id="rooms-container">
+                        <!-- Dynamic Rooms loaded here -->
+                        <div class="loading-spinner">Loading Rooms...</div>
+                    </div>
+                </section>
+
+                <!-- Bookings Column -->
+                <section class="bookings-section">
+                    <div class="section-title-bar">
+                        <h3>Active Bookings</h3>
+                        <span class="count-badge count-badge-alt" id="bookings-count">0 Bookings</span>
+                    </div>
+                    
+                    <div class="bookings-list" id="bookings-container">
+                        <!-- Dynamic Bookings loaded here -->
+                        <div class="no-data">No active bookings found.</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h4>Book Room <span id="modal-room-id">101</span></h4>
+                    <p class="modal-room-details"><span id="modal-room-type">Single</span> — ₹<span id="modal-room-price">1000</span>/night</p>
+                </div>
+                <button type="button" class="btn-close" id="btn-close-modal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="booking-form" class="modal-form">
+                <input type="hidden" id="form-room-id">
+                
+                <div class="form-group">
+                    <label for="customer_name" class="required-label">Customer Name</label>
+                    <input type="text" id="customer_name" required placeholder="Enter full name" class="form-control">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="required-label">Email Address</label>
+                        <input type="email" id="email" required placeholder="name@email.com" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="required-label">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="10-digit number" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="check_in" class="required-label">Check-In Date</label>
+                        <input type="date" id="check_in" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="check_out" class="required-label">Check-Out Date</label>
+                        <input type="date" id="check_out" required class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btn-cancel-booking" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

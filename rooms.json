@@ -1,0 +1,37 @@
+[
+  {
+    "room_id": 101,
+    "room_type": "Single",
+    "price": 1000,
+    "available": true,
+    "area": "Gachibowli"
+  },
+  {
+    "room_id": 102,
+    "room_type": "Double",
+    "price": 1800,
+    "available": true,
+    "area": "Madhapur"
+  },
+  {
+    "room_id": 103,
+    "room_type": "Suite",
+    "price": 3500,
+    "available": true,
+    "area": "Banjara Hills"
+  },
+  {
+    "room_id": 104,
+    "room_type": "Single",
+    "price": 1100,
+    "available": true,
+    "area": "Gachibowli"
+  },
+  {
+    "room_id": 105,
+    "room_type": "Double",
+    "price": 2000,
+    "available": true,
+    "area": "Madhapur"
+  }
+]

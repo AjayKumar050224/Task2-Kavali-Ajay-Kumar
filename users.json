@@ -1,0 +1,9 @@
+[
+  {
+    "user_id": 1,
+    "full_name": "Ajay Kumar",
+    "email": "kavaliajaykumar05@gmail.com",
+    "password_hash": "scrypt:32768:8:1$ifwmWmWoSuIDnc48$20bb361a0e49cf007444a4185a4f867b0084f1c7d59d68a57534392bf3d210e951230b3dc9c445da0a63cbe59fb1a58e2e4b5128608126f2374cc7b496eaac6c",
+    "created_at": "2026-06-15 14:46:11"
+  }
+]

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Sign In</title>
+    <!-- Modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+    <div class="auth-page">
+        <div class="auth-card">
+            <!-- Brand Header -->
+            <div class="brand auth-brand">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21V11C19 9.89543 18.1046 9 17 9H7C5.89543 9 5 9.89543 5 11V21M3 21H21M10 13H14M10 17H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 3L20 9H4L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1>LuxStay</h1>
+                <span class="badge">Premium Portal</span>
+            </div>
+
+            <p class="auth-subtitle">Sign in to manage hotel rooms and bookings</p>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab active" id="tab-login" role="tab" aria-selected="true">
+                    Login
+                </button>
+                <button type="button" class="auth-tab" id="tab-signup" role="tab" aria-selected="false">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-email" class="required-label">Email Address</label>
+                    <input type="email" id="login-email" required placeholder="name@email.com" class="form-control" autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password" class="required-label">Password</label>
+                    <input type="password" id="login-password" required placeholder="Enter your password" class="form-control" autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn btn-primary auth-submit">
+                    <span class="btn-text">Login</span>
+                </button>
+
+                <p class="auth-switch">
+                    Don't have an account?
+                    <a href="#" class="auth-switch-link" id="switch-to-signup">Sign Up</a>
+                </p>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label for="signup-name" class="required-label">Full Name</label>
+                    <input type="text" id="signup-name" required placeholder="Enter your full name" class="form-control" autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email" class="required-label">Email Address</label>
+                    <input type="email" id="signup-email" required placeholder="name@email.com" class="form-control" autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password" class="required-label">Password</label>
+                    <input type="password" id="signup-password" required placeholder="At least 6 characters" class="form-control" autocomplete="new-password" minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-confirm-password" class="required-label">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required placeholder="Re-enter your password" class="form-control" autocomplete="new-password" minlength="6">
+                </div>
+
+                <button type="submit" class="btn btn-primary auth-submit">
+                    <span class="btn-text">Create Account</span>
+                </button>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="#" class="auth-switch-link" id="switch-to-login">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
